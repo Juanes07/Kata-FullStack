@@ -70,8 +70,10 @@ const Form = () => {
   };
 
   return (
+    <div >
     <form ref={formRef}>
-      <input
+      <input className="input-group-sm mb-3 "
+      placeholder="Agrega una nueva Tarea"
         type="text"
         name="name"
         defaultValue={item.name}
@@ -80,12 +82,13 @@ const Form = () => {
         }}
       ></input>
       {
-        item.id && <button onClick={onEdit}>Actualizar</button>
+        item.id && <button className="btn btn-success" onClick={onEdit}>Actualizar</button>
       }
       {
-        !item.id && <button onClick={onAdd}>Agregar</button>
+        !item.id && <button className="btn btn-secondary ms-2" onClick={onAdd}>Agregar</button>
       }
     </form>
+    </div>
   );
 };
 
@@ -112,27 +115,26 @@ const List = () => {
     dispatch({type: "edit-item", item: todo })
   };
   return (
-    <table>
+    <table className="table">
       <thead>
         <tr>
-          <td>ID</td>
-          <td>Nombre</td>
+          <td> ID </td>
+          <td> Nombre </td>
           <td>¿ Esta completado ?</td>
         </tr>
       </thead>
       <tbody>
-
         {state.list.map((todo) => {
           return (
-            <tr key={todo.id}>
+            <tr key={todo.id} className="">
               <td>{todo.id}</td>
               <td>{todo.name}</td>
               <td>{todo.completed === true ? 'Si' : 'No'}</td>
               <td>
-                <button onClick={() => onDelete(todo.id)}>Eliminar</button>
+                <button className="btn btn-danger" onClick={() => onDelete(todo.id)}>Eliminar</button>
               </td>
               <td>
-                <button onClick={() => onEdit(todo)}>Editar</button>
+                <button className="btn btn-primary" onClick={() => onEdit(todo)}>Editar</button>
               </td>
             </tr>
           );
@@ -180,10 +182,12 @@ const StoreProvider = ({ children }) => {
 
 function App() {
   return (
+    <div className="container mt-3  ">
     <StoreProvider>
       <Form />
       <List />
     </StoreProvider>
+    </div>
   );
 }
 
